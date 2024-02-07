@@ -1,6 +1,6 @@
 import { button, useControls } from 'leva';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { generateSeed } from '../LevelGeneration/NewMapGen/utils';
+import { generateSeed } from '../LevelGeneration/utilsSeed';
 
 export function useLevelControls() {
 
@@ -8,7 +8,10 @@ export function useLevelControls() {
     const [newMapTrigger, setNewMapTrigger] = useState(0);
     const [newMapFromSeedTrigger, setNewMapFromSeedTrigger] = useState(0);
     
+    //We use a random factor in our controls to mix it in the seed so other random rule's based component 
+    //can reuse the same random number to generate the same terrain for example 
     const randomFactor= Math.random()
+
     const terrainControls = useControls('Terrain', {
         tileCount: {
             value: 18,

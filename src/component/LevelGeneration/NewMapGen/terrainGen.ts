@@ -1,9 +1,11 @@
-import { useMemo } from "react";
-import type { HexInfo, MaterialType, NeighborHexInfo } from "../LevelGenTypes";
+import type { HexInfo } from "../LevelGenTypes";
 import * as THREE from "three"
+import { SeededRNG } from "../utilsSeed";
 
 export function terrainGen(count: number, probaMountain:number, probaDesert:number, cityPosX : number, cityPosY: number, randomFactor: number): HexInfo[] {
     const hexTypes: HexInfo[] = []
+
+    const rng = new SeededRNG(randomFactor);
 
     for (let row = 0; row < count; row++) {
         for (let col = 0; col < count; col++) {
@@ -21,7 +23,7 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
                 {hexInfo.type = "sea";}
             // Add a bit of noise on map edges
             else if (distanceFromCenter > 70 / 100 * map_max_radius) {
-                hexInfo.type = randomFactor > 0.9 ? "grass" : "sea"; 
+                hexInfo.type = rng.random() > 0.9 ? "grass" : "sea"; 
             } 
             // Make sure no moutain or desert touching sea
             else if (distanceFromCenter >= 45 / 100 * map_max_radius) {
@@ -30,9 +32,9 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
             // Closer to map center we put desert on top and moutain below with low proba
             else if (distanceFromCenter < 45 /100 * map_max_radius) {
                 if (row > count/2){
-                    hexInfo.type = randomFactor > probaMountain ? "grass" : "mountain";// South mountains
+                    hexInfo.type = rng.random() > probaMountain ? "grass" : "mountain";// South mountains
                 }else if (row + 1 < count/2){
-                    hexInfo.type = randomFactor > probaDesert ? "grass" : "desert"; // North desert
+                    hexInfo.type = rng.random() > probaDesert ? "grass" : "desert"; // North desert
                 }
                 //We make sure no moutain touch desert in the middle of map
                 else {
@@ -41,14 +43,14 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
             }
 
             //City position's
-            if (row ==  cityPosY && col == cityPosX){hexInfo.type = "city"; }
+            if (row == cityPosY && col == cityPosX){hexInfo.type = "city";}
 
             hexTypes.push(hexInfo);
         }
     }
-
     return hexTypes;
 }
+
 export function hexAssetsGen(count: number, hexMapInfo: HexInfo[], nbFarm: number, cityPosX: number, cityPosY: number) {
     let farmLeftToPlace = nbFarm;
 
@@ -63,39 +65,4 @@ export function hexAssetsGen(count: number, hexMapInfo: HexInfo[], nbFarm: numbe
 
         return hex; // Return the original hex if no update is needed
     });
-}
-
-export function getHexPosition(tileCount: number, radius: number, borderSize: number ){
-    //Some Hex Math
-    const verticalDistance = 1.5 * radius + borderSize;
-    const horizontalDistance = Math.sqrt(3) * radius + borderSize;
-
-     // Calculate the positions of the hexagons
-     const hexPositions = useMemo(() => {
-        const positions = [];
-        for (let row = 0; row < tileCount; row++) {
-            for (let col = 0; col < tileCount; col++) {
-                const x = col * horizontalDistance + (row % 2 ? horizontalDistance / 2 : 0);
-                const z = row * verticalDistance;
-                positions.push(new THREE.Vector3(x, 0, z));
-            }
-        }
-        return positions;
-    }, [tileCount, horizontalDistance, verticalDistance]);
-
-    return hexPositions;
-}
-
-
-export function getHexPositionFromGrid(gridPosX: number, gridPosY: number, radius: number, borderSize: number ){
-    //Some Hex Math
-    const verticalDistance = 1.5 * radius + borderSize;
-    const horizontalDistance = Math.sqrt(3) * radius + borderSize;
-
-    const x = gridPosX * horizontalDistance + (gridPosY % 2 ? horizontalDistance / 2 : 0);
-    const z = gridPosY * verticalDistance;
-
-
-    return [x,z];
-
 }

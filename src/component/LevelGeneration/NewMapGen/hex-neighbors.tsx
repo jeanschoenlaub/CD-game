@@ -5,7 +5,7 @@ export function getNeighbors(hextype: HexInfo[], count: number): NeighborHexInfo
     const neighbors: NeighborHexInfo[][] = [];
 
     for (let i = 0; i < count * count; i++) {
-        const hexNeighbors = []; // Initialize an empty array for each hex's neighbors
+        const hexNeighbors: NeighborHexInfo[]  = []; // Initialize an empty array for each hex's neighbors
 
         const offset = (Math.floor(i / count)) % 2 === 1 ? 1 : 0;
 

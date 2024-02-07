@@ -3,6 +3,7 @@ import type { HexInfo} from '../LevelGenTypes';
 import { CityGen } from './Buildings/City';
 import { Nature } from './Nature/Nature';
 import { Farm } from './Buildings/Farm';
+import { SeededRNG } from '../utilsSeed';
 
 interface AssetMapProps {
     hexTypes:HexInfo[];
@@ -10,16 +11,15 @@ interface AssetMapProps {
     radius: number;
     borderSize: number;
     treeScale: number;
-    seed: number;
+    randomFactor: number;
     hideAssets: boolean;
 }
   
-export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeScale = 1, borderSize = 0, seed, hideAssets = false }: AssetMapProps) {
+export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeScale = 1, borderSize = 0, randomFactor, hideAssets = false }: AssetMapProps) {
 
-    useEffect(() => {
-        console.log("when generating assts",hexTypes);
-    }, [hexTypes]);
-    
+    //Used to generate a new random number for each hex
+    const rng = new SeededRNG(randomFactor);
+
     return (
         <>
             {hexTypes.map((hexInfo, index) => {
@@ -42,7 +42,6 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                             hexInfo={hexInfo} 
                             radius={radius}
                             borderSize={borderSize}
-                            seed={seed}
                         />
                     )
                 } 
@@ -54,7 +53,7 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                             treeScale={treeScale}
                             radius={radius}
                             borderSize={borderSize}
-                            seed={seed}
+                            randomNumber={rng.random()}
                         />
                     )
                 } 

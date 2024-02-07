@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import * as THREE from 'three';
 import type { MaterialType } from '../LevelGenTypes';
 import { useTextures } from '../../../features/Loading/TextureLoader';
@@ -6,7 +6,7 @@ import { useTextures } from '../../../features/Loading/TextureLoader';
 export const useMaterials = () => {
     const { terrainTextures, allTexturesLoaded } = useTextures();
 
-    const materials: Record<MaterialType, THREE.MeshStandardMaterial> = useMemo(() => {
+    const materials: Partial<Record<MaterialType, THREE.MeshStandardMaterial>> = useMemo(() => {
         if (!allTexturesLoaded) return {}; 
         else{ return{
                 sea: new THREE.MeshStandardMaterial({ map: terrainTextures.sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),
@@ -30,6 +30,7 @@ export const useMaterials = () => {
                 desert: new THREE.MeshStandardMaterial({ map: terrainTextures.desert, flatShading: true , metalness: 0.6, roughness: 0.9}),
                 forest: new THREE.MeshStandardMaterial({ map: terrainTextures.forest, flatShading: true , metalness: 0.6, roughness: 0.9}),
                 city: new THREE.MeshStandardMaterial({ map: terrainTextures.city, flatShading: true , metalness: 0.6, roughness: 0.9}),
+                farm: new THREE.MeshStandardMaterial({ map: terrainTextures.desert, flatShading: true, metalness: 0.6, roughness: 0.9 }),
         }
     }
     }, [allTexturesLoaded, terrainTextures]);

@@ -1,11 +1,11 @@
 import React, { type Dispatch, type SetStateAction, useEffect, useMemo } from 'react';
 import * as THREE from "three"
 import type { HexInfo } from '../LevelGenTypes';
-import { getHexPosition, terrainGen} from '../NewMapGen/terrainGen';
+
 import { useMaterials } from './useMaterials';
 import { getDataMaterial } from '../NewMapGen/blended-data-textures';
 import { getNeighborTypeValue, getNeighbors } from '../NewMapGen/hex-neighbors';
-import { blendTerrain } from '../NewMapGen/blended-map-textures';
+import getHexPosition from '../NewMapGen/utils';
 
 interface HexMapProps {
     count?: number;
@@ -14,7 +14,7 @@ interface HexMapProps {
     borderSize?: number;
   }
   
-  export function HexMap({ count = 20, hexMapInfo, radius=1, borderSize=0 }: HexMapProps) {
+export function HexMap({ count = 20, hexMapInfo, radius=1, borderSize=0 }: HexMapProps) {
 
     const hexNeighbors = getNeighbors(hexMapInfo, count);
 

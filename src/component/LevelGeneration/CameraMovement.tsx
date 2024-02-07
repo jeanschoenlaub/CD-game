@@ -1,6 +1,6 @@
 import { MapControls } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import * as THREE from "three" 
 
 

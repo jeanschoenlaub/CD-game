@@ -1,21 +1,20 @@
 import * as THREE from "three";
+import React from "react";
+
 import { HexInfo } from "../../LevelGenTypes";
-import { getHexPositionFromGrid } from "../../NewMapGen/terrainGen";
-import { seededGridRandom } from "../../NewMapGen/utils";
 import { FarmBarn } from './FarmBarn.jsx';
 import { useMaterials } from "../useMaterials";
+import { getHexPositionFromGrid } from "../../NewMapGen/utils.js";
 
 interface FarmProps {
     hexInfo: HexInfo;
     radius: number;
     borderSize: number;
-    seed: number;
 }
   
-export function Farm({ hexInfo, radius, borderSize, seed}: FarmProps) {
+export function Farm({ hexInfo, radius, borderSize}: FarmProps) {
 
     const position = getHexPositionFromGrid(hexInfo.gridPosX, hexInfo.gridPosY, radius, borderSize);
-    const random = seededGridRandom(seed, hexInfo.gridPosX, hexInfo.gridPosY)
 
     const fieldGeometry = new THREE.BoxGeometry(1,1,1)
 
@@ -37,7 +36,8 @@ export function Farm({ hexInfo, radius, borderSize, seed}: FarmProps) {
         }
     });
 
-    return (<>
+    return (
+    <>
         <FarmBarn
             key={"1"}
             scale={0.5}

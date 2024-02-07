@@ -1,8 +1,8 @@
 import TreeSpruce from './TreeSpruce.jsx';
 import TreePalm from './TreePalm.jsx';
 import TreeGrass from './TreeGrass.jsx';
-import { HexInfo } from '~/component/LevelGeneration/LevelGenTypes.js';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { HexInfo } from '../../../LevelGenTypes.js';
 
 interface NatureProps {
     hexInfo: HexInfo;
@@ -53,7 +53,7 @@ export function Forest({ hexInfo, treeScale, random, position }: NatureProps) {
 
     // Memoize tree generation
     const trees = useMemo(() => {
-        const generatedTrees = [];
+        const generatedTrees: JSX.Element[] = [];
         if (random > forestConfig.proba) {
             const treeCount = calculateTreeCount(random, forestConfig.minTrees, forestConfig.maxTrees);
             const forestCenter = randomizeForestCenter(position, random, forestConfig.forestCentralRandomness);

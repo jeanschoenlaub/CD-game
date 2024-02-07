@@ -1,7 +1,5 @@
 import { useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useAudio } from '../Audio/AudioContext';
-import { useEffect } from 'react';
 
 export function useTextures() {
     const textureData = [

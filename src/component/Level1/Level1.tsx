@@ -5,10 +5,10 @@ import { AssetMap } from "../LevelGeneration/AssetGeneration/AssetMap";
 import { useLevelControls } from "./useLevelControls";
 import { CameraMovement } from "../LevelGeneration/CameraMovement";
 import { useAudio } from "../../features/Audio/AudioContext";
-import { Float, Text, useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei";
 import { hexAssetsGen, terrainGen } from "../LevelGeneration/NewMapGen/terrainGen";
 import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures";
-import { decodeSeed, hashStringToNumber } from "../LevelGeneration/NewMapGen/utils";
+import { decodeSeed } from "../LevelGeneration/utilsSeed";
 
 
 export function Level1() {
@@ -51,18 +51,10 @@ export function Level1() {
     const hexTerrainWithBlend = useMemo(() => blendTerrain(hexTerrainInfo, tileCount), [tileCount, seed]);
     const hexAssetInfo = useMemo(() => hexAssetsGen(tileCount,hexTerrainWithBlend,nbFarms,cityPosX,cityPosY), [tileCount, seed]);
     
+    //Use effect to reset map on slider change
     useEffect(() => {
         setHexMapInfo(hexAssetInfo);
     }, [hexAssetInfo, hideAssets]); // Only update when hexTerrainWithBlend changes
-
-    let randomNumberedSeed = 0 
-    useEffect(() => {
-        randomNumberedSeed = hashStringToNumber(seed);
-    }, [seed]); // Only update when hexTerrainWithBlend changes
-
-    console.log(
-        tileCount, mountainProba, desertProba, startingPopulation, treeScale, nbFarms, randomFactor
-    )
 
     return (
         <>
@@ -88,7 +80,7 @@ export function Level1() {
                         borderSize={borderSize}
                         treeScale={treeScale}
                         hideAssets={hideAssets}
-                        seed={randomNumberedSeed}
+                        randomFactor={randomFactor}
                     />
                 )}
             </Suspense>

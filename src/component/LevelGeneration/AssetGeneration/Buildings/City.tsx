@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import * as THREE from "three"
 import { useMaterials } from '../useMaterials';
 import type { AssetMaterialType, HexInfo } from '../../LevelGenTypes';
-import { getHexPosition, getHexPositionFromGrid } from '../../NewMapGen/terrainGen';
+import { getHexPositionFromGrid } from '../../NewMapGen/utils';
 
 interface BuildingInfo {
     pop?: number;
@@ -91,11 +91,11 @@ const BuildingMeshes: React.FC<BuildingMeshesProps> = ({ buildingsInfo, building
 
 function distributePopulation(totalPopulation: number, numBuildings: number) {
     let populationLeft = totalPopulation;
-    const distribution = [];
+    const distribution: number[] = [];
     let decreasingFactor = 1.3; // Start with a factor of 1.2 for the first building
 
     for (let i = 0; i < numBuildings; i++) {
-        let allocatedPopulation;
+        let allocatedPopulation = 0;
 
         if (i === 0) {
             // First building gets population based on the initial factor
