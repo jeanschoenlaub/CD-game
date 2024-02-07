@@ -11,9 +11,10 @@ interface AssetMapProps {
     borderSize: number;
     treeScale: number;
     seed: number;
+    hideAssets: boolean;
 }
   
-export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeScale = 1, borderSize = 0, seed }: AssetMapProps) {
+export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeScale = 1, borderSize = 0, seed, hideAssets = false }: AssetMapProps) {
 
     useEffect(() => {
         console.log("when generating assts",hexTypes);
@@ -45,7 +46,7 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                         />
                     )
                 } 
-                else if (hexInfo.type.includes("grass")) {
+                else if (hexInfo.type.includes("grass") && !hideAssets) {
                     return (
                         <Nature
                             key={`nature-${index}`} // Unique key for each Natural component

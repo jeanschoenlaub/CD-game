@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type { HexInfo, MaterialType, NeighborHexInfo } from "../LevelGenTypes";
 import * as THREE from "three"
 
-export function terrainGen(count: number, probaMountain:number, probaDesert:number, cityPosX : number, cityPosY: number): HexInfo[] {
+export function terrainGen(count: number, probaMountain:number, probaDesert:number, cityPosX : number, cityPosY: number, randomFactor: number): HexInfo[] {
     const hexTypes: HexInfo[] = []
 
     for (let row = 0; row < count; row++) {
@@ -21,7 +21,7 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
                 {hexInfo.type = "sea";}
             // Add a bit of noise on map edges
             else if (distanceFromCenter > 70 / 100 * map_max_radius) {
-                hexInfo.type = Math.random() > 0.9 ? "grass" : "sea"; 
+                hexInfo.type = randomFactor > 0.9 ? "grass" : "sea"; 
             } 
             // Make sure no moutain or desert touching sea
             else if (distanceFromCenter >= 45 / 100 * map_max_radius) {
@@ -30,9 +30,9 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
             // Closer to map center we put desert on top and moutain below with low proba
             else if (distanceFromCenter < 45 /100 * map_max_radius) {
                 if (row > count/2){
-                    hexInfo.type = Math.random() > probaMountain ? "grass" : "mountain";// South mountains
+                    hexInfo.type = randomFactor > probaMountain ? "grass" : "mountain";// South mountains
                 }else if (row + 1 < count/2){
-                    hexInfo.type = Math.random() > probaDesert ? "grass" : "desert"; // North desert
+                    hexInfo.type = randomFactor > probaDesert ? "grass" : "desert"; // North desert
                 }
                 //We make sure no moutain touch desert in the middle of map
                 else {

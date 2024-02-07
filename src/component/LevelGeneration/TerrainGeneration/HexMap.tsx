@@ -18,11 +18,6 @@ interface HexMapProps {
 
     const hexNeighbors = getNeighbors(hexMapInfo, count);
 
-    // useEffect(() => {
-    //     setHexMapInfo(hexTypesWithBlend);
-    // }, [hexTypesWithBlend]); // Dependency
-
-
     // Load the terrainMaterials 
     const materials = useMaterials();
 

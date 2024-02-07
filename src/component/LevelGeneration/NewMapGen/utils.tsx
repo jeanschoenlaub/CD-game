@@ -12,7 +12,6 @@ interface SeedInput {
     mountainProba: number;
     desertProba: number;
     startingPopulation: number;
-    treeScale: number;
     nbFarms: number;
     randomFactor: number;
 }
@@ -95,16 +94,16 @@ export function hashStringToNumber(str: string) {
 }
 
 export function decodeSeed(encodedSeed:string ) {
-    try {
         const decodedString = atob(encodedSeed); // Decode base64 to string
         const seedObject = JSON.parse(decodedString); // Parse string to JSON
+
+        console.log(seedObject)
 
         // Extract parameters from the seed object
         const tileCount = seedObject.tileCount;
         const mountainProba = seedObject.mountainProba;
         const desertProba = seedObject.desertProba;
         const startingPopulation = seedObject.startingPopulation;
-        const treeScale = seedObject.treeScale;
         const nbFarms = seedObject.nbFarms;
         const randomFactor = seedObject.randomFactor;
 
@@ -113,12 +112,7 @@ export function decodeSeed(encodedSeed:string ) {
             mountainProba,
             desertProba,
             startingPopulation,
-            treeScale,
             nbFarms,
             randomFactor
         };
-    } catch (error) {
-        console.error("Error decoding seed:", error);
-        return null; // or a default object
-    }
 }

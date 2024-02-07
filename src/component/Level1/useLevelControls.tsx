@@ -4,7 +4,9 @@ import { generateSeed } from '../LevelGeneration/NewMapGen/utils';
 
 export function useLevelControls() {
 
-    const [trigger, setTrigger] = useState(0);
+    //Two trigger for the 2 leva controls
+    const [newMapTrigger, setNewMapTrigger] = useState(0);
+    const [newMapFromSeedTrigger, setNewMapFromSeedTrigger] = useState(0);
     
     const randomFactor= Math.random()
     const terrainControls = useControls('Terrain', {
@@ -63,62 +65,39 @@ export function useLevelControls() {
     });
 
     const [seed, setSeed] = useState(() => generateInitialSeed());
-
     function generateInitialSeed() {
         return generateSeed({ 
             tileCount: terrainControls.tileCount,
             mountainProba: terrainControls.mountainProba,
             desertProba: terrainControls.desertProba,
             startingPopulation: infrastructureControls.startingPopulation,
-            treeScale: infrastructureControls.treeScale,
             nbFarms:infrastructureControls.nbFarms,
             randomFactor: randomFactor,
         });
     }
 
-    useControls({NewMap: button(() => setTrigger(t => t + 1))});
-
+    // Bunch of code below to generate a new seed when pressing New map and setting it in UI
+    useControls({NewMap: button(() => setNewMapTrigger(t => t + 1))});
     let newSeed = useMemo(() => 
         generateSeed({ 
         tileCount: terrainControls.tileCount,
         mountainProba: terrainControls.mountainProba,
         desertProba: terrainControls.desertProba,
         startingPopulation: infrastructureControls.startingPopulation,
-        treeScale: infrastructureControls.treeScale,
         nbFarms:infrastructureControls.nbFarms,
         randomFactor: randomFactor,
     }), [
-        trigger,
-        //new regenrate world triggerwith a way to pass arguments from regenrate world
+        newMapTrigger,
     ]);
-
     useEffect(() => {
-        setSeed(newSeed)
-        console.log(newSeed)
-        set({ GeneratedSeed: newSeed });
+        setSeed(newSeed) // Update seed state
+        set({ GeneratedSeed: newSeed }); // set the seed in UI to the newSeedGenerated
     },[newSeed])
 
-    const regenerateWorld = useCallback(() => {
-        const decodedSeed = atob(seed);
-        const seedObject = JSON.parse(decodedSeed);
-
-        console.log("farms",seedObject.nbFarms)
-
-        let newSeed = generateSeed({ 
-            tileCount: seedObject.tileCount,
-            mountainProba: seedObject.mountainProba,
-            desertProba: seedObject.desertProba,
-            startingPopulation: seedObject.startingPopulation,
-            treeScale: seedObject.treeScale,
-            nbFarms:seedObject.nbFarms,
-            randomFactor: seedObject.randomFactor,
-        })
-
-        console.log("farms",seedObject.nbFarms)
-
-        setSeed(newSeed);
-
-    }, []);
+    // Now both when the user press new map the seed is set from seed entered
+    useEffect(() => {
+        setSeed(GeneratedSeed);
+    }, [newMapFromSeedTrigger]);
 
 
     const [{ GeneratedSeed }, set] = useControls(() => ({
@@ -129,7 +108,7 @@ export function useLevelControls() {
         }
     }));
 
-    useControls({GenerateFromSeed: button(regenerateWorld)})
+    useControls({GenerateFromSeed: button(() => setNewMapFromSeedTrigger(t => t + 1))})
     
 
     return { ...terrainControls, ...infrastructureControls, seed };
