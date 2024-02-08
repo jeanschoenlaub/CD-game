@@ -1,8 +1,10 @@
-import type { HexInfo } from "../LevelGenTypes";
+import type { HexInfo } from "../LevelGeneration/LevelGenTypes";
 import * as THREE from "three"
-import { SeededRNG } from "../utilsSeed";
+import { SeededRNG } from "../LevelGeneration/utilsSeed";
 
-export function terrainGen(count: number, probaMountain:number, probaDesert:number, cityPosX : number, cityPosY: number, randomFactor: number): HexInfo[] {
+
+// This function assigns Hex terrain (eg. sea, desert ..) based on hardcoded rules and random number for each level 
+export function lvl1HexTerrain(count: number, probaMountain:number, probaDesert:number, cityPosX : number, cityPosY: number, randomFactor: number): HexInfo[] {
     const hexTypes: HexInfo[] = []
 
     const rng = new SeededRNG(randomFactor);
@@ -43,7 +45,7 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
             }
 
             //City position's
-            if (row == cityPosY && col == cityPosX){hexInfo.type = "city";}
+            if (row == cityPosY && col == cityPosX){hexInfo.type = "city"; hexInfo.HexAssets = "city";}
 
             hexTypes.push(hexInfo);
         }
@@ -51,7 +53,8 @@ export function terrainGen(count: number, probaMountain:number, probaDesert:numb
     return hexTypes;
 }
 
-export function hexAssetsGen(count: number, hexMapInfo: HexInfo[], nbFarm: number, cityPosX: number, cityPosY: number) {
+
+export function lvl1InitialHexAssetsAssignment(count: number, hexMapInfo: HexInfo[], nbFarm: number, cityPosX: number, cityPosY: number) {
     let farmLeftToPlace = nbFarm;
 
     return hexMapInfo.map((hex, index) => {

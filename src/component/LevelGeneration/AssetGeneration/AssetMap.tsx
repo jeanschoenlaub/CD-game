@@ -24,7 +24,7 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
         <>
             {hexTypes.map((hexInfo, index) => {
                 // Determine the type of hexagon and select the corresponding material
-                if (hexInfo.type == "city"){
+                if (hexInfo.HexAssets == "city"){
                    return <> 
                         <CityGen 
                             key={`city-${index}`} // Unique key for each CityGen component

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import type { MaterialType } from '../LevelGenTypes';
-import { useTextures } from '../../../features/Loading/TextureLoader';
+import type { MaterialType } from '../LevelGeneration/LevelGenTypes';
+import { useTextures } from '../../features/Loading/TextureLoader';
 
 export const useMaterials = () => {
     const { terrainTextures, allTexturesLoaded } = useTextures();
@@ -11,7 +11,7 @@ export const useMaterials = () => {
         else{ return{
                 sea: new THREE.MeshStandardMaterial({ map: terrainTextures.sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),
                 grass: new THREE.MeshStandardMaterial({ map: terrainTextures.grass, flatShading: true, metalness: 0.6, roughness: 0.9 }),
-                grass1Sea: new THREE.MeshStandardMaterial({ map: terrainTextures.grass1Sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),
+                grass1Sea: new THREE.MeshStandardMaterial({ map: terrainTextures.grass1Sea, flatShading: true, metalness: 0.6, roughness: 0.9}),
                 grass2Sea: new THREE.MeshStandardMaterial({ map: terrainTextures.grass2Sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),
                 grass3Sea: new THREE.MeshStandardMaterial({ map: terrainTextures.grass3Sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),
                 grass4Sea: new THREE.MeshStandardMaterial({ map: terrainTextures.grass4Sea, flatShading: true, metalness: 0.6, roughness: 0.9 }),

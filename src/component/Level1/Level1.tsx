@@ -1,4 +1,4 @@
-import { HexMap } from "../LevelGeneration/TerrainGeneration/HexMap";
+import { HexMap } from "../HexMap/HexMap";
 import type { HexInfo } from "../LevelGeneration/LevelGenTypes";
 import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { AssetMap } from "../LevelGeneration/AssetGeneration/AssetMap";
@@ -6,7 +6,7 @@ import { useLevelControls } from "./useLevelControls";
 import { CameraMovement } from "../LevelGeneration/CameraMovement";
 import { useAudio } from "../../features/Audio/AudioContext";
 import { useProgress } from "@react-three/drei";
-import { hexAssetsGen, terrainGen } from "../LevelGeneration/NewMapGen/terrainGen";
+import { lvl1HexTerrain, lvl1InitialHexAssetsAssignment } from "./InitialiseL1";
 import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures";
 import { decodeSeed } from "../LevelGeneration/utilsSeed";
 
@@ -20,22 +20,21 @@ export function Level1() {
     const { active, progress, errors, item, loaded, total } = useProgress()
 
     useEffect(() => {
-        // This will run when 'loaded' or 'total' changes
         if (!active && (total != 0)) {
             setLeveLLoaded(true);
         }
-    }, [active]); // Dependencies for the effect
+    }, [active]);
    
+    //Parameters for now coming from Leva, but later randomly generated
     const { seed, hideAssets, borderSize, treeScale } = useLevelControls();
-
     const { tileCount, mountainProba, desertProba, startingPopulation, nbFarms, randomFactor }= decodeSeed(seed)
+    const radius=1;
 
+    // All the specific starting condition related to Level 1 
     const cityHexBlockXOffset = 0
     const cityHexBlockYOffset = 0
     const cityPosX = Math.floor((tileCount-1)/4) + cityHexBlockXOffset
     const cityPosY = Math.floor((tileCount-1)/2) + cityHexBlockYOffset
-
-    const radius=1;
 
     //Play music once loaded - disabled for testing 
     const audioContext = useAudio();
@@ -46,11 +45,11 @@ export function Level1() {
         }
     },[levelLoaded])
 
-    // Generate Map if New Map (always yes now)
-    const hexTerrainInfo = useMemo(() => terrainGen(tileCount, mountainProba, desertProba,  cityPosX, cityPosY,randomFactor), [tileCount, seed]);
+    // If new map: Generate a new map using a mix of specific lvl 1 fucntion and general 
+    const hexTerrainInfo = useMemo(() => lvl1HexTerrain(tileCount, mountainProba, desertProba,  cityPosX, cityPosY,randomFactor), [tileCount, seed]);
     const hexTerrainWithBlend = useMemo(() => blendTerrain(hexTerrainInfo, tileCount), [tileCount, seed]);
-    const hexAssetInfo = useMemo(() => hexAssetsGen(tileCount,hexTerrainWithBlend,nbFarms,cityPosX,cityPosY), [tileCount, seed]);
-    
+    const hexAssetInfo = useMemo(() => lvl1InitialHexAssetsAssignment(tileCount,hexTerrainWithBlend,nbFarms,cityPosX,cityPosY), [tileCount, seed]);
+
     //Use effect to reset map on slider change
     useEffect(() => {
         setHexMapInfo(hexAssetInfo);
@@ -67,11 +66,9 @@ export function Level1() {
                     hexMapInfo={hexMapInfo}
                     radius={radius}
                     borderSize={borderSize}
+                    cityPosX={cityPosX}
+                    cityPosY={cityPosY}
                 />
-                {/* <ResourceMap 
-                    count={tileCount} 
-                    hexTypes={hexTypes}
-                /> */}
                 {hexMapInfo.length > 0 && (
                     <AssetMap 
                         hexTypes={hexMapInfo}
