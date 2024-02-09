@@ -10,7 +10,6 @@ import { lvl1HexTerrain, lvl1InitialHexAssetsAssignment } from "./InitialiseL1";
 import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures";
 import { decodeSeed } from "../LevelGeneration/utilsSeed";
 
-
 export function Level1() {
     
     // State to store the hex types
@@ -69,6 +68,7 @@ export function Level1() {
                     cityPosX={cityPosX}
                     cityPosY={cityPosY}
                 />
+    
                 {hexMapInfo.length > 0 && (
                     <AssetMap 
                         hexTypes={hexMapInfo}

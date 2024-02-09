@@ -1,6 +1,7 @@
 import type { HexInfo } from "../LevelGeneration/LevelGenTypes";
 import * as THREE from "three"
 import { SeededRNG } from "../LevelGeneration/utilsSeed";
+import { calculateDistanceBetweenHexes } from "../LevelGeneration/NewMapGen/utils";
 
 
 // This function assigns Hex terrain (eg. sea, desert ..) based on hardcoded rules and random number for each level 
@@ -56,14 +57,24 @@ export function lvl1HexTerrain(count: number, probaMountain:number, probaDesert:
 
 export function lvl1InitialHexAssetsAssignment(count: number, hexMapInfo: HexInfo[], nbFarm: number, cityPosX: number, cityPosY: number) {
     let farmLeftToPlace = nbFarm;
+    let oiWellLeftToPlace = 2;
 
     return hexMapInfo.map((hex, index) => {
         const row = Math.floor(index / count);
         const col = index % count;
 
-        if ((row <= cityPosY + 3  && row >= cityPosY - 3) && ((col <= cityPosX + 3 && col >= cityPosX - 3) )&& hex.type === "grass" && farmLeftToPlace > 0) {
+        const distanceToCity = calculateDistanceBetweenHexes(col, row, cityPosX, cityPosY, 1, 0);
+
+        // Check if the current hex is within 3 tiles of the city
+        if ( (distanceToCity <= Math.sqrt(3)*3+0.1) && hex.type === "grass" && farmLeftToPlace > 0) {
             farmLeftToPlace--;
             return { ...hex, HexAssets: "farm" }; // Update the object with HexAssets
+        }
+
+        // Check if the current hex is within 3 tiles of the city
+        if ( (distanceToCity <= Math.sqrt(3)*3+0.1) && hex.type === "grass" && oiWellLeftToPlace > 0 ) {
+            oiWellLeftToPlace--;
+            return { ...hex, HexAssets: "oilWell" }; // Update the object with HexAssets
         }
 
         return hex; // Return the original hex if no update is needed

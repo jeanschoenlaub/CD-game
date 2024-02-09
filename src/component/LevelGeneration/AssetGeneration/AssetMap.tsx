@@ -4,6 +4,8 @@ import { CityGen } from './Buildings/City';
 import { Nature } from './Nature/Nature';
 import { Farm } from './Buildings/Farm';
 import { SeededRNG } from '../utilsSeed';
+import OilWell from './Buildings/OilWell';
+import { getHexPositionFromGrid } from '../NewMapGen/utils';
 
 interface AssetMapProps {
     hexTypes:HexInfo[];
@@ -23,6 +25,7 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
     return (
         <>
             {hexTypes.map((hexInfo, index) => {
+                const position = getHexPositionFromGrid(hexInfo.gridPosX, hexInfo.gridPosY, radius, borderSize);
                 // Determine the type of hexagon and select the corresponding material
                 if (hexInfo.HexAssets == "city"){
                    return <> 
@@ -44,7 +47,13 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                             borderSize={borderSize}
                         />
                     )
-                } 
+                }
+                else if (hexInfo.HexAssets == "oilWell") {
+                    console.log("why")
+                    return (
+                        <OilWell scale={0.015} position={[position[0],0,position[1]]} ></OilWell>
+                    )
+                }  
                 else if (hexInfo.type.includes("grass") && !hideAssets) {
                     return (
                         <Nature

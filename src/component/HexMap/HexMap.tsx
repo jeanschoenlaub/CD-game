@@ -5,7 +5,7 @@ import type { HexInfo } from '../LevelGeneration/LevelGenTypes';
 import { useMaterials } from './useMaterials';
 import { getDataMaterial } from '../LevelGeneration/NewMapGen/blended-data-textures';
 import { getNeighborTypeValue, getNeighbors } from '../LevelGeneration/NewMapGen/hex-neighbors';
-import getHexPosition, { calculateDistanceBetweenHexes, hexDistance } from '../LevelGeneration/NewMapGen/utils';
+import getHexPosition, { calculateDistanceBetweenHexes } from '../LevelGeneration/NewMapGen/utils';
 import { handleHexClick } from '../clickInteractions/clickLogic';
 
 interface HexMapProps {
@@ -56,7 +56,7 @@ export function HexMap({ count = 20, hexMapInfo, radius=1, borderSize=0, cityPos
 
                 const distanceToCity = calculateDistanceBetweenHexes(col, row, cityPosX, cityPosY, radius, borderSize);
 
-                // Check if the current hex is within 2 tiles of the city
+                // Check if the current hex is within 3 tiles of the city
                 if (distanceToCity <= Math.sqrt(3)*3+0.1) {
                     // Hex is close to the city, change its material to indicate city limits
                     const highlightedMaterial = material!.clone(); // Clone the material safely
