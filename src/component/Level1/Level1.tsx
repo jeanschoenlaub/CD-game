@@ -61,9 +61,8 @@ export function Level1() {
     return (
         <>
             <Suspense fallback={null}>
-                <CameraMovement 
-                    tileCount={tileCount} 
-                />
+                <CameraMovement tileCount={tileCount} />
+                <PlayerHand cards={["B23","B22","B21"]}></PlayerHand>
                 <HexMap 
                     count={tileCount} 
                     hexMapInfo={hexMapInfo}
@@ -84,7 +83,7 @@ export function Level1() {
                         randomFactor={randomFactor}
                     />
                 )}
-                <PlayerHand cards={["B23"]}></PlayerHand>
+                
             </Suspense>
             <Construction scale={0.1} position={[12.1,0.05,12]}></Construction>
             <ConstructionBarriers scale={0.1} position={[12.1,0.05,12]}></ConstructionBarriers>

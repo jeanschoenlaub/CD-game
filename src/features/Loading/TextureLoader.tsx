@@ -38,12 +38,8 @@ export function useTextures() {
         '/textures/terrain/Sand4Mountain.png',
         '/textures/terrain/Sand5Mountain.png',
         '/textures/terrain/Sand6Mountain.png',
-        '/textures/resources/Wheat1.png',
-        '/textures/resources/Wheat2.png',
-        '/textures/resources/Wheat3.png',
-        '/textures/resources/Coal1.png',
-        '/textures/resources/Coal2.png',
-        '/textures/resources/Coal3.png',
+        '/textures/cards/PolicyCard.png',
+        '/textures/cards/BuildingCard.png',
     ];
 
     // Use useLoader to load all textures at once
@@ -96,19 +92,23 @@ export function useTextures() {
     sand4Mountain: loadedTextures[assetKeysLength + 18],
     sand5Mountain: loadedTextures[assetKeysLength + 19],
     sand6Mountain: loadedTextures[assetKeysLength + 20],
-    wheat1: loadedTextures[assetKeysLength + 21],
-    wheat2: loadedTextures[assetKeysLength + 22],
-    wheat3: loadedTextures[assetKeysLength + 23],
-    coal1: loadedTextures[assetKeysLength + 24],
-    coal2: loadedTextures[assetKeysLength + 25],
-    coal3: loadedTextures[assetKeysLength + 26],
     };
 
-    const allTexturesLoaded = Object.values(assetTextures).every((texture) => !!texture) && Object.values(terrainTextures).every((texture) => !!texture) 
+    const terrainKeysLength = Object.keys(terrainTextures).length;
+
+    const cardTextures = {
+    buildingCard: loadedTextures[assetKeysLength+terrainKeysLength],
+    policyCard: loadedTextures[assetKeysLength+terrainKeysLength + 1],
+    };
+
+    const allTexturesLoaded = Object.values(assetTextures).every((texture) => !!texture) 
+                            && Object.values(terrainTextures).every((texture) => !!texture)
+                            && Object.values(cardTextures).every((texture) => !!texture)
 
     return {
       assetTextures: assetTextures,
       terrainTextures: terrainTextures,
+      cardTextures: cardTextures,
       allTexturesLoaded: allTexturesLoaded,
     };
 }
