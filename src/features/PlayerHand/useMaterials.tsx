@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { useTextures } from '../../features/Loading/TextureLoader';
+import { useTextures } from '../Loading/TextureLoader';
 
 export type CardMaterialType = 
     'cardBuilding' | 'cardPolicy' 

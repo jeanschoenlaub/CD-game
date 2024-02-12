@@ -9,10 +9,9 @@ import { useProgress } from "@react-three/drei";
 import { lvl1HexTerrain, lvl1InitialHexAssetsAssignment } from "./InitialiseL1";
 import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures";
 import { decodeSeed } from "../LevelGeneration/utilsSeed";
-import { Construction, Mine } from "../LevelGeneration/AssetGeneration/Buildings/Construction";
-import { Mine2 } from "../LevelGeneration/AssetGeneration/Buildings/Mine2";
+import { Construction } from "../LevelGeneration/AssetGeneration/Buildings/Construction";
 import { ConstructionBarriers } from "../LevelGeneration/AssetGeneration/Buildings/ConstructionBarriers";
-import { PlayerHand } from "../PlayerHand/PlayerHand";
+import { PlayerHand } from "../../features/PlayerHand/PlayerHand";
 
 export function Level1() {
     
@@ -62,7 +61,7 @@ export function Level1() {
         <>
             <Suspense fallback={null}>
                 <CameraMovement tileCount={tileCount} />
-                <PlayerHand cards={["B23","B22","B21"]}></PlayerHand>
+                <PlayerHand cards={["B23","B22","B21","B23","B22","B21","B23","B22","B21"]}></PlayerHand>
                 <HexMap 
                     count={tileCount} 
                     hexMapInfo={hexMapInfo}
