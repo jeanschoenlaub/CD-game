@@ -49,7 +49,6 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                     )
                 }
                 else if (hexInfo.HexAssets == "oilWell") {
-                    console.log("why")
                     return (
                         <OilWell scale={0.015} position={[position[0],0,position[1]]} ></OilWell>
                     )

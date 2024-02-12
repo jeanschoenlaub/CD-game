@@ -9,6 +9,10 @@ import { useProgress } from "@react-three/drei";
 import { lvl1HexTerrain, lvl1InitialHexAssetsAssignment } from "./InitialiseL1";
 import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures";
 import { decodeSeed } from "../LevelGeneration/utilsSeed";
+import { Construction, Mine } from "../LevelGeneration/AssetGeneration/Buildings/Construction";
+import { Mine2 } from "../LevelGeneration/AssetGeneration/Buildings/Mine2";
+import { ConstructionBarriers } from "../LevelGeneration/AssetGeneration/Buildings/ConstructionBarriers";
+import { PlayerHand } from "../PlayerHand/PlayerHand";
 
 export function Level1() {
     
@@ -80,7 +84,10 @@ export function Level1() {
                         randomFactor={randomFactor}
                     />
                 )}
+                <PlayerHand cards={["B23"]}></PlayerHand>
             </Suspense>
+            <Construction scale={0.1} position={[12.1,0.05,12]}></Construction>
+            <ConstructionBarriers scale={0.1} position={[12.1,0.05,12]}></ConstructionBarriers>
         </>
     );
 }
