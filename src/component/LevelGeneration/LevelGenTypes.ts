@@ -11,7 +11,6 @@ export type AssetMaterialType =
     | 'buildingSTopS' 
     | 'buildingMSide1' | 'buildingMSide2' | 'buildingMSide3'
     | 'buildingLSide1' | 'buildingLSide2' | 'buildingLSide3' | 'buildingLSide4' 
-    | 'farmSide' | 'farmTop' 
     // | 'buildingLTopS' | 'buildingLTopG' | 'buildingLTopE' ;
 
 export type HexInfo = {

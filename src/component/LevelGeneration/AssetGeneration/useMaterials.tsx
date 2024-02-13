@@ -21,8 +21,6 @@ export const useMaterials = () => {
             buildingLSide2 : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLSide2, transparent: true, metalness: 0.6, roughness: 0.3}),
             buildingLSide3 : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLSide3, transparent: true, metalness: 0.6, roughness: 0.3}),
             buildingLSide4 : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLSide4, transparent: true, metalness: 0.6, roughness: 0.3}),
-            farmSide : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.farmSide, transparent: true, metalness: 0.6, roughness: 0.3}),
-            farmTop : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.farmTop, transparent: true, metalness: 0.6, roughness: 0.3}),
             // buildingLTopS : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLTopS, transparent: true, metalness: 0.6, roughness: 0.3}),
             // buildingLTopE : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLTopE, transparent: true, metalness: 0.6, roughness: 0.3}),
             // buildingLTopG : new THREE.MeshStandardMaterial({ color: 0xffffff, map: assetTextures.buildingLTopG, transparent: true, metalness: 0.6, roughness: 0.3}),

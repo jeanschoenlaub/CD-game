@@ -15,8 +15,6 @@ export function useTextures() {
         '/textures/assets/BuildingLSide2.png',
         '/textures/assets/BuildingLSide3.png',
         '/textures/assets/BuildingLSide4.png',
-        '/textures/assets/farmSide.png',
-        '/textures/assets/farmTop.png',
         '/textures/terrain/Sea.png',
         '/textures/terrain/Grass.png',
         '/textures/terrain/Mountain.png',
@@ -64,8 +62,6 @@ export function useTextures() {
         buildingLSide2: loadedTextures[9],
         buildingLSide3: loadedTextures[10],
         buildingLSide4: loadedTextures[11],
-        farmSide: loadedTextures[12],
-        farmTop: loadedTextures[13],
     };
 
     const assetKeysLength = Object.keys(assetTextures).length;

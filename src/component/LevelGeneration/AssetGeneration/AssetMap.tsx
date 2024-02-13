@@ -6,6 +6,7 @@ import { Farm } from './Buildings/Farm';
 import { SeededRNG } from '../utilsSeed';
 import OilWell from './Buildings/OilWell';
 import { getHexPositionFromGrid } from '../NewMapGen/utils';
+import { FarmContours } from './Buildings/FarmContour';
 
 interface AssetMapProps {
     hexTypes:HexInfo[];
@@ -39,13 +40,19 @@ export function AssetMap({  hexTypes, startingPopulation=1000, radius =1 , treeS
                     </>
                 } 
                 else if (hexInfo.HexAssets == "farm") {
-                    return (
+                    return ( 
+                        <>
                         <Farm
                             key={`farm-${index}`} // Unique key for each Farm component
-                            hexInfo={hexInfo} 
-                            radius={radius}
-                            borderSize={borderSize}
+                            scale={0.11} 
+                            position={[position[0],0.01,position[1]]}
                         />
+                        <FarmContours
+                            key={`farmContour-${index}`} // Unique key for each Farm component
+                            scale={0.11} 
+                            position={[position[0],0.01,position[1]]}
+                        />
+                        </>
                     )
                 }
                 else if (hexInfo.HexAssets == "oilWell") {
