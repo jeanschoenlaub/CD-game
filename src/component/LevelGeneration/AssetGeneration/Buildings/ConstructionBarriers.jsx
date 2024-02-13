@@ -5,7 +5,7 @@ export function ConstructionBarriers(props) {
   const { nodes, materials } = useGLTF("/models/construction-barriers/model.glb");
   return (
     <group {...props} dispose={null}>
-      {/* <group
+      <group
         position={[8.751, 1.456, 2.205]}
         rotation={[0, 0, -Math.PI / 2]}
         scale={[0.347, 0.118, 1.581]}
@@ -28,7 +28,7 @@ export function ConstructionBarriers(props) {
           geometry={nodes.Cube039_3.geometry}
           material={materials.MettalicBllack}
         />
-      </group> */}
+      </group>
       <group
         position={[-8.526, 1.456, -2.246]}
         rotation={[Math.PI, 0, Math.PI / 2]}

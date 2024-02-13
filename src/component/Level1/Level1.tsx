@@ -12,6 +12,7 @@ import { decodeSeed } from "../LevelGeneration/utilsSeed";
 import { Construction } from "../LevelGeneration/AssetGeneration/Buildings/Construction";
 import { ConstructionBarriers } from "../LevelGeneration/AssetGeneration/Buildings/ConstructionBarriers";
 import { PlayerHand } from "../../features/PlayerHand/PlayerHand";
+import { CoalPlant } from "../LevelGeneration/AssetGeneration/Buildings/CoalPlant";
 
 export function Level1() {
     
@@ -84,8 +85,13 @@ export function Level1() {
                 )}
                 
             </Suspense>
+
+            <CoalPlant scale={0.09} position={[13,0.05,10.5]}></CoalPlant>
+
             <Construction scale={0.1} position={[12.1,0.05,12]}></Construction>
             <ConstructionBarriers scale={0.1} position={[12.1,0.05,12]}></ConstructionBarriers>
+            <Construction scale={0.1} position={[14,0.05,12]}></Construction>
+            <ConstructionBarriers scale={0.1} position={[14,0.05,12]}></ConstructionBarriers>
         </>
     );
 }
