@@ -135,6 +135,7 @@ export function PlayerHand({ cards }: PlayerHandProps) {
                     rotation={[0, 0, 0]}
                     onPointerDown={(event) => handleCardSelect(cards[index],event, cardRefs.current[index])}
                     onPointerUp={() => handleCardDrop(cards[index], cardRefs.current[index])}
+                    //PERF these could be quite CPU intensive as testing each frame
                     onPointerEnter={(event) => handleCardHoverIn(cards[index],event, cardRefs.current[index])}
                     onPointerLeave={(event) => handleCardHoverOut(cards[index], event, cardRefs.current[index])}
                 />

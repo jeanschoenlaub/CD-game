@@ -1,0 +1,8 @@
+.nextTurnButton {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    width: 10%;
+    height: 10%;
+    overflow: hidden;
+}

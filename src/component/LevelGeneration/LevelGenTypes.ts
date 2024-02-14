@@ -25,6 +25,7 @@ export type HexInfo = {
 export type NeighborHexInfo = {
     direction: string, //Neighbor direction : NE, NW ...
     type: string | undefined, // Can be undefined if an hex is on the edge
+    HexAssets?: string;
 };
 
 export type Resource = Record<string, number>;

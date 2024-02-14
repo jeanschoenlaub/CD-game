@@ -5,32 +5,42 @@ export function getNeighbors(hextype: HexInfo[], count: number): NeighborHexInfo
     const neighbors: NeighborHexInfo[][] = [];
 
     for (let i = 0; i < count * count; i++) {
-        const hexNeighbors: NeighborHexInfo[]  = []; // Initialize an empty array for each hex's neighbors
-
+        const hexNeighbors: NeighborHexInfo[] = [];
         const offset = (Math.floor(i / count)) % 2 === 1 ? 1 : 0;
 
-        // Push neighbor information into neighbors[i]
-        if (hextype[i - count + offset]) {
-            hexNeighbors.push({direction: "NE", type: hextype[i - count + offset]?.type});
-        }
-        if (i < (count * count) - 1 && hextype[i + 1]) {
-            hexNeighbors.push({direction: "E", type: hextype[i + 1]?.type});
-        }
-        if (i < (count * count) - count - 1 && hextype[i + count + offset]) {
-            hexNeighbors.push({direction: "SE", type: hextype[i + count + offset]?.type});
-        }
-        if (i < (count * count) - count - 1 && hextype[i + count + offset - 1]) {
-            hexNeighbors.push({direction: "SW", type: hextype[i + count + offset - 1]?.type});
-        }
-        if (i > 0 && hextype[i - 1]) {
-            hexNeighbors.push({direction: "W", type: hextype[i - 1]?.type});
-        }
-        if (i - count - 1 + offset >= 0 && hextype[i - count - 1 + offset]) {
-            hexNeighbors.push({direction: "NW", type: hextype[i - count - 1 + offset]?.type});
-        }
-        neighbors.push(hexNeighbors)
+        const addNeighbor = (index: number, direction: string) => {
+            if (hextype[index]) {
+                hexNeighbors.push({
+                    direction: direction,
+                    type: hextype[index].type,
+                    HexAssets: hextype[index].HexAssets,
+                });
+            }
+        };
+
+        addNeighbor(i - count + offset, "NE");
+        addNeighbor(i + 1, "E");
+        addNeighbor(i + count + offset, "SE");
+        addNeighbor(i + count + offset - 1, "SW");
+        addNeighbor(i - 1, "W");
+        addNeighbor(i - count - 1 + offset, "NW");
+
+        neighbors.push(hexNeighbors);
     }
     return neighbors;
+}
+
+export function getVisibleFences(neighbors: NeighborHexInfo[]): Record<string, boolean> {
+    const visibleFences = { NW: true, W: true, E: true, SE: true, NE: true, SW: true };
+
+    neighbors.forEach(neighbor => {
+        if (neighbor.HexAssets === "farm") {
+            // If a neighboring hex is a farm, set the corresponding fence to false (not visible)
+            visibleFences[neighbor.direction] = false;
+        }
+    });
+
+    return visibleFences;
 }
 
 

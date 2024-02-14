@@ -63,7 +63,7 @@ export function useLevelControls() {
             value: 4,
             step: 1,
             min: 0,  
-            max: 5, 
+            max: 20, 
         },
     });
 

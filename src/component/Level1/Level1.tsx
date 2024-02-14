@@ -75,6 +75,7 @@ export function Level1() {
                 {hexMapInfo.length > 0 && (
                     <AssetMap 
                         hexTypes={hexMapInfo}
+                        count={tileCount} 
                         startingPopulation={startingPopulation}
                         radius={radius}
                         borderSize={borderSize}
