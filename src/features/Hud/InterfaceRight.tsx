@@ -1,9 +1,9 @@
 import React from "react";
 import "./InterfaceRight.css";
-import { useGame } from "../GameLogic/GameContext";
+import { useGameStore } from "../../stores/useGame";
 
-export default function InterfaceRight({ onNextTurn }) {
-  const { nextTurn } = useGame();
+export default function InterfaceRight() {
+  const nextTurn = useGameStore((state) => state.nextTurn);
 
   return (
     <div className="nextTurnButton">
