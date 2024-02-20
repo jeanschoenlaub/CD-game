@@ -43,7 +43,7 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
     const [volume, setVolume] = useState(0.3); // Range: 0.0 - 1.0
     const [currentTrack, setCurrentTrack] = useState(0);
     const playlist = [
-        "/audio/music/Drumatic.mp3",
+        //"/audio/music/Drumatic.mp3",
     ]; // Your playlist array
 
     // Function to play a specific track
