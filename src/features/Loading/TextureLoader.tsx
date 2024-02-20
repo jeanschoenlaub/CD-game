@@ -15,29 +15,27 @@ export function useTextures() {
         '/textures/assets/BuildingLSide2.png',
         '/textures/assets/BuildingLSide3.png',
         '/textures/assets/BuildingLSide4.png',
-        '/textures/terrain/Sea.png',
-        '/textures/terrain/Grass.png',
-        '/textures/terrain/Mountain.png',
-        '/textures/terrain/Desert.png',
-        '/textures/terrain/Forest.png',
-        '/textures/terrain/City.png',
-        '/textures/terrain/Grass1Sea.png',
-        '/textures/terrain/Grass2Sea.png',
-        '/textures/terrain/Grass3Sea.png',
-        '/textures/terrain/Grass4Sea.png',
-        '/textures/terrain/Grass5Sea.png',
-        '/textures/terrain/Grass6Sea.png',
-        '/textures/terrain/Grass1Mountain.png',
-        '/textures/terrain/Grass2Mountain.png',
-        '/textures/terrain/Grass3Mountain.png',
-        '/textures/terrain/Sand1Mountain.png',
-        '/textures/terrain/Sand2Mountain.png',
-        '/textures/terrain/Sand3Mountain.png',
-        '/textures/terrain/Sand4Mountain.png',
-        '/textures/terrain/Sand5Mountain.png',
-        '/textures/terrain/Sand6Mountain.png',
-        '/textures/cards/PolicyCard.png',
-        '/textures/cards/BuildingCard.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Desert.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Forest.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/City.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass1Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass2Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass3Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass4Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass5Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass6Sea.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass1Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass2Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Grass3Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand1Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand2Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand3Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand4Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand5Mountain.png',
+        'https://cool-down-textures.s3.us-west-2.amazonaws.com/terrain/Sand6Mountain.png',
     ];
 
     // Use useLoader to load all textures at once
@@ -92,19 +90,13 @@ export function useTextures() {
 
     const terrainKeysLength = Object.keys(terrainTextures).length;
 
-    const cardTextures = {
-    buildingCard: loadedTextures[assetKeysLength+terrainKeysLength],
-    policyCard: loadedTextures[assetKeysLength+terrainKeysLength + 1],
-    };
 
     const allTexturesLoaded = Object.values(assetTextures).every((texture) => !!texture) 
                             && Object.values(terrainTextures).every((texture) => !!texture)
-                            && Object.values(cardTextures).every((texture) => !!texture)
 
     return {
       assetTextures: assetTextures,
       terrainTextures: terrainTextures,
-      cardTextures: cardTextures,
       allTexturesLoaded: allTexturesLoaded,
     };
 }

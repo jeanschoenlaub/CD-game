@@ -5,7 +5,7 @@ import React from 'react';
 import { useGameStore } from '../stores/useGame';
 
 import { PlayerHand } from '../features/Cards/player-hand';
-import { FadeToBlack } from './EndTurn';
+import { FadeToBlack } from '../features/Env/map-effects';
 
 export default function Experience() {
     const { yearNumber, cards } = useGameStore(); // Use cards from the game store

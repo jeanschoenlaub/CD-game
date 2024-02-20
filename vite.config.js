@@ -42,7 +42,7 @@ export default {
         emptyOutDir: true, // Empty the folder first
         sourcemap: true, // Add sourcemap
         lib: {
-          entry: 'component/Game.jsx', // Use Game.jsx as the entry point
+          entry: 'component/Game.tsx', // Use Game.jsx as the entry point
           name: 'CDGame',
           formats: ['es'],
           fileName: (format) => `cd-game.${format}.js`,
