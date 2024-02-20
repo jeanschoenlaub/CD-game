@@ -1,25 +1,27 @@
 import Lights from './Lights'
 import { Level1 } from './Level1/Level1'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useGameStore } from '../stores/useGame';
 
-export default function Experience()
-{
+import { PlayerHand } from '../features/Cards/player-hand';
+import { FadeToBlack } from './EndTurn';
 
-    const yearNumber = useGameStore((state) => state.yearNumber);
+export default function Experience() {
+    const { yearNumber, cards } = useGameStore(); // Use cards from the game store
+    const [isTurnEnd, setIstTurnEnd] = useState(false);
 
     useEffect(() => {
-        // Trigger your animation or logic based on yearNumber change
-        console.log("Animating for year:", yearNumber);
-    }, [yearNumber])
+        setIstTurnEnd(!isTurnEnd);
+    }, [yearNumber]);
 
     return (
         <>
-            <color args={ [ '#bdedfc' ] } attach="background" />
+            <color args={['#bdedfc']} attach="background" />
             <Lights />
-
-            <Level1/> 
+            <FadeToBlack yearNumber={yearNumber} />
+            <PlayerHand cards={cards} /> {/* Use cards from the game store */}
+            <Level1 />
         </>
-    )
+    );
 }

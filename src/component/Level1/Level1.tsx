@@ -11,7 +11,6 @@ import { blendTerrain } from "../LevelGeneration/NewMapGen/blended-map-textures"
 import { decodeSeed } from "../LevelGeneration/utilsSeed";
 import { Construction } from "../LevelGeneration/AssetGeneration/Buildings/Construction";
 import { ConstructionBarriers } from "../LevelGeneration/AssetGeneration/Buildings/ConstructionBarriers";
-import { PlayerHand } from "../../features/PlayerHand/PlayerHand";
 import { CoalPlant } from "../LevelGeneration/AssetGeneration/Buildings/CoalPlant";
 
 export function Level1() {
@@ -62,7 +61,6 @@ export function Level1() {
         <>
             <Suspense fallback={null}>
                 <CameraMovement tileCount={tileCount} />
-                <PlayerHand cards={["B23","B22","B21","B23","B22","B21","B23","B22","B21"]}></PlayerHand>
                 <HexMap 
                     count={tileCount} 
                     hexMapInfo={hexMapInfo}

@@ -58,19 +58,19 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
 
     //const musicRef = useRef();
 
-    // useEffect(() => {
-    //     // Check if the current track URL is defined
-    //     if (!isBrowser || !audio) return; // Exit if not in browser
-    //     const trackUrl = playlist[currentTrack];
-    //     if (trackUrl && typeof trackUrl === 'string') {
-    //         audio.src = trackUrl;
-    //         if (isPlaying) {
-    //             audio.play().catch((e) => {
-    //                 console.error("Error playing audio:", e);
-    //             });
-    //         }
-    //     }
-    // }, [currentTrack, isPlaying, playlist]);
+    useEffect(() => {
+        // Check if the current track URL is defined
+        if (!isBrowser || !audio) return; // Exit if not in browser
+        const trackUrl = playlist[currentTrack];
+        if (trackUrl && typeof trackUrl === 'string') {
+            audio.src = trackUrl;
+            if (isPlaying) {
+                audio.play().catch((e) => {
+                    console.error("Error playing audio:", e);
+                });
+            }
+        }
+    }, [currentTrack, isPlaying, playlist]);
 
     // Function to toggle play/pause
     const togglePlay = () => {

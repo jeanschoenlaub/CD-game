@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@react-three/fiber": "8.15",
+    "gsap": "^3.12.5",
     "leva": "^0.9.35",
     "r3f-perf": "^7.1.2",
     "react": "18.2",
