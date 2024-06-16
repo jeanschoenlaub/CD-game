@@ -1,0 +1,1 @@
+html,body,#root{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden}body,button,input,textarea,select{font-family:Galindo,sans-serif;font-weight:400;font-style:normal}.topBar{position:fixed;top:0;width:100%;height:10%;overflow:hidden}.nextTurnButton{position:fixed;top:50%;right:0;width:10%;height:10%;overflow:hidden}
