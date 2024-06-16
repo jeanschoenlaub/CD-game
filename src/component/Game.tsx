@@ -2,7 +2,7 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Experience from './Experience.tsx';
 import { Loader } from '@react-three/drei'
-import {AudioProvider} from '../features/Audio/AudioContext.tsx'
+import { AudioProvider } from '../features/Audio/AudioContext.tsx'
 import InterfaceTop  from "../features/Hud/InterfaceTop.tsx"
 import InterfaceRight  from "../features/Hud/InterfaceRight.tsx"
 import { Perf } from "r3f-perf";
