@@ -32,29 +32,30 @@ export default {
     },
     // build:
     // {
-    //     outDir: '../dist', // Output in the dist/ folder
+    //     outDir: '../dist2', // Output in the dist/ folder
     //     emptyOutDir: true, // Empty the folder first
     //     sourcemap: true // Add sourcemap
     // },
 
-    build: {
-        outDir: '../dist', // Output in the dist/ folder
-        emptyOutDir: true, // Empty the folder first
-        sourcemap: true, // Add sourcemap
-        lib: {
-          entry: 'component/Game.tsx', // Use Game.jsx as the entry point
-          name: 'CDGame',
-          formats: ['es'],
-          fileName: (format) => `cd-game.${format}.js`,
-        },
-        rollupOptions: {
-          external: ['react', 'react-dom'],
-          output: {
-            globals: {
-              react: 'React',
-              'react-dom': 'ReactDOM',
-            },
-          },
-        },
-      },
+    //LibraryBuild
+    // build: {
+    //     outDir: '../dist', // Output in the dist/ folder
+    //     emptyOutDir: true, // Empty the folder first
+    //     sourcemap: true, // Add sourcemap
+    //     lib: {
+    //       entry: 'component/Game.tsx', // Use Game.jsx as the entry point
+    //       name: 'CDGame',
+    //       formats: ['es'],
+    //       fileName: (format) => `cd-game.${format}.js`,
+    //     },
+    //     rollupOptions: {
+    //       external: ['react', 'react-dom'],
+    //       output: {
+    //         globals: {
+    //           react: 'React',
+    //           'react-dom': 'ReactDOM',
+    //         },
+    //       },
+    //     },
+    //   },
 }
